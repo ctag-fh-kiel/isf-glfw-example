@@ -162,11 +162,16 @@ int main(int argc, char *argv[]) {
     ISFVal maxVal = floatAttr->maxVal();
     double tmpVal = currentVal.getDoubleVal();
 
+    ISFAttrRef p2d = isfScene->doc()->input(string("brickOffset"));
+    if (p2d == nullptr || p2d->type() != ISFValType_Point2D)
+        cerr << "No such argument brickOffset" << std::endl;
+    ISFVal p2dVal = p2d->currentVal();
+
     // Main loop
     while (!glfwWindowShouldClose(window)) {
         // modulate attributes
         //  add .01 to the current val, looping the value around the min/max
-        tmpVal += 0.01;
+        tmpVal += 0.001;
         if (!maxVal.isNullVal() && tmpVal > maxVal.getDoubleVal()) {
             if (!minVal.isNullVal())
                 tmpVal = minVal.getDoubleVal();
@@ -174,8 +179,16 @@ int main(int argc, char *argv[]) {
                 tmpVal = 0.;
         }
         currentVal = ISFFloatVal(tmpVal);
+        double v = p2dVal.getPointValByIndex(0);
+        v += 0.001;
+        p2dVal.setPointValByIndex(0, v);
+        v = p2dVal.getPointValByIndex(1);
+        v -= 0.002;
+        p2dVal.setPointValByIndex(1, v);
         //  apply the new value we calculated to the attribute
         floatAttr->setCurrentVal(currentVal);
+        p2d->setCurrentVal(p2dVal);
+
 
 
         targetTex = isfScene->createAndRenderABuffer(displayScene->orthoSize());
