@@ -11,3 +11,11 @@ Tested on OSX 12.6
 
 # GLEW & GLFW
 see https://www.reddit.com/r/gamedev/comments/45v9uz/comment/d00jsgz/?utm_source=share&utm_medium=web2x&context=3
+
+# Dependencies:
+- glfw
+  - https://github.com/glfw/glfw
+  - https://formulae.brew.sh/formula/glfw
+- glew
+  - https://github.com/nigels-com/glew
+  - https://formulae.brew.sh/formula/glew#default

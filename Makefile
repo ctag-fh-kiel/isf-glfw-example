@@ -29,17 +29,11 @@ ifeq ($(PLATFORM),Raspbian GNU/Linux)
 else ifeq ($(shell uname),Linux)
 
 else ifeq ($(PLATFORM),Darwin)
-	CXX = clang
-	CPPFLAGS := -Wall -g -arch x86_64 -O3 -std=c++11 -stdlib=libc++ -fPIC 
+	CPPFLAGS := -Wall -g -O3 -std=c++11 -stdlib=libc++ -fPIC
 	CPPFLAGS += -DVVGL_SDK_GLFW
-	OBJCPPFLAGS := $(CPPFLAGS)
-	
-	CPPFLAGS += -x c++
-	OBJCPPFLAGS += -x objective-c++
 	CPPFLAGS += -I/usr/local/Cellar/glfw/3.3.8/include
 	CPPFLAGS += -I/usr/local/Cellar/glew/2.2.0_1/include
-	LDFLAGS := -lstdc++ -lobjc -lglew -lglfw
-	#LDFLAGS += -framework Cocoa -framework Foundation -framework CoreMedia -framework ImageIO -framework OpenGL -framework IOSurface -framework CoreGraphics -framework CoreVideo
+	LDFLAGS := -lstdc++ -lglew -lglfw
 	LDFLAGS += -framework OpenGL
 endif
 
@@ -60,26 +54,13 @@ OBJCPPFLAGS += -I./dep/VVGL/include
 
 #	rules that define object files for source files
 OBJS := $(patsubst ./src/%.cpp,./obj/%.o,$(wildcard ./src/*.cpp))
-ifeq ($(PLATFORM),Darwin)
-OBJS += $(patsubst ./src/%.mm,./obj/%.mm.o,$(wildcard ./src/*.mm))
-endif
+
 
 
 #	targets are object files, recipe compiles them
-ifeq ($(PLATFORM),Darwin)
-./obj/%.mm.o : ./src/%.mm
-	$(shell mkdir -p ./obj)
-	$(CXX) $(OBJCPPFLAGS) -c $< -o $@
-endif
 ./obj/%.o : ./src/%.cpp
 	$(shell mkdir -p ./obj)
 	$(CXX) $(CPPFLAGS) -c $< -o $@
-
-
-#$(info Platform is $(PLATFORM))
-#$(info OBJS are $(OBJS))
-#$(info CPPFLAGS are $(CPPFLAGS))
-#$(info LDFLAGS are $(LDFLAGS))
 
 
 #	the output file is an executable
@@ -104,9 +85,3 @@ clean:
 clean_all : clean
 	$(MAKE) -C ./dep/VVISF clean_all
 	$(MAKE) -C ./dep/VVGL clean_all
-
-
-
-
-
-
