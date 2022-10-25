@@ -55,8 +55,8 @@ class VVISF_EXPORT ISFPassTarget	{
 		
 		ISFPassTarget(const std::string & inName, const ISFDoc * inParentDoc);
 		~ISFPassTarget();
-		ISFPassTarget(const ISFPassTarget & n) = default;
-		ISFPassTarget(ISFPassTarget && n) = default;
+		ISFPassTarget(const ISFPassTarget & n);// = default;
+		ISFPassTarget(ISFPassTarget && n);// = default;
 		ISFPassTarget & operator=(ISFPassTarget & n) = delete;
 		ISFPassTarget & operator=(ISFPassTarget && n) = delete;
 		

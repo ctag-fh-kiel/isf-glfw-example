@@ -36,10 +36,10 @@ else ifeq ($(PLATFORM),Darwin)
 	CXX = clang
 	#CPPFLAGS := -Wall -g -arch $(ARCH) -O3 -std=c++11 -stdlib=libc++ -fPIC
 	CPPFLAGS := -Wall -g -O3 -std=c++11 -stdlib=libc++ -fPIC
-	CPPFLAGS += -isysroot //Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+	#CPPFLAGS += -isysroot //Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 	CPPFLAGS += -I./include/ -DVVGL_SDK_GLFW
-	CPPFLAGS += -L/usr/local/Cellar/glfw/3.3.8/lib -I/usr/local/Cellar/glfw/3.3.8/include
-	CPPFLAGS += -L/usr/local/Cellar/glew/2.2.0_1/lib -I/usr/local/Cellar/glew/2.2.0_1/include
+	CPPFLAGS += -I/usr/local/Cellar/glfw/3.3.8/include
+	CPPFLAGS += -I/usr/local/Cellar/glew/2.2.0_1/include
     CPPFLAGS += -DGL_SILENCE_DEPRECATION
 	OBJCPPFLAGS := $(CPPFLAGS)
 	
@@ -47,7 +47,7 @@ else ifeq ($(PLATFORM),Darwin)
 	OBJCPPFLAGS += -x objective-c++
 	
 	LDFLAGS := -arch $(ARCH) -lstdc++ -shared -fPIC -lobjc
-	LDFLAGS += -framework Foundation -framework ImageIO -framework OpenGL -framework IOSurface -framework CoreGraphics -framework CoreVideo
+	#LDFLAGS += -framework Foundation -framework ImageIO -framework OpenGL -framework IOSurface -framework CoreGraphics -framework CoreVideo
 endif
 
 
