@@ -1,4 +1,5 @@
 #include "GLTexToCPUCopier.hpp"
+#include <cstring>
 
 
 

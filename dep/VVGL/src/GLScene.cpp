@@ -1,4 +1,5 @@
 #include "GLScene.hpp"
+#include <cstring> //memset
 
 
 
