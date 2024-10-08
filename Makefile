@@ -27,6 +27,15 @@ ifeq ($(PLATFORM),Raspbian GNU/Linux)
 	LDFLAGS += -lGLESv2 -lEGL
 	LDFLAGS += -lbcm_host -lpthread
 else ifeq ($(shell uname),Linux)
+#	CXX = g++
+	CPPFLAGS := -Wall -g -std=c++23 -fPIC
+	CPPFLAGS += -O2
+	CPPFLAGS += -Wno-unknown-pragmas
+	CPPFLAGS += -DVVGL_SDK_GLFW
+	CPPFLAGS += `pkg-config --cflags glfw3`
+
+	LDFLAGS := -lstdc++ -fPIC
+	LDFLAGS += -lGLEW -lGL `pkg-config --static --libs glfw3`
 
 else ifeq ($(PLATFORM),Darwin)
 	CPPFLAGS := -Wall -g -O3 -std=c++11 -stdlib=libc++ -fPIC

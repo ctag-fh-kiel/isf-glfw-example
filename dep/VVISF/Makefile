@@ -27,6 +27,14 @@ ifeq ($(PLATFORM),Raspbian GNU/Linux)
 	LDFLAGS += -lGLESv2 -lEGL
 	LDFLAGS += -lbcm_host -lpthread
 else ifeq ($(shell uname),Linux)
+	CPPFLAGS := -Wall -g -std=c++23 -fPIC
+	CPPFLAGS += -O2
+	CPPFLAGS += -Wno-unknown-pragmas
+	CPPFLAGS += -I./include/ -DVVGL_SDK_GLFW
+
+	LDFLAGS := -lstdc++ -fPIC
+	LDFLAGS += -lGLEW -lGL
+
 
 else ifeq ($(PLATFORM),Darwin)
 	# make sure we have an ARCH value even if one wasn't provided by the environment!
