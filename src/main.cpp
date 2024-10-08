@@ -110,16 +110,24 @@ int main(int argc, char *argv[]) {
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         glDisableClientState(GL_COLOR_ARRAY);
-        float verts[] = {-1.0, -1.0,
-                        -1.0, 1.0,
-                        1.0, 1.0,
-                        1.0, -1.0};
-
-        float texs[] = {0.0, 0.0,
-                        0.0, 1.0,
-                        1.0, 1.0,
-                        1.0, 0.0};
-        glVertexPointer(2, GL_FLOAT, 0, verts);
+        VVGL::Rect tmpRect(0., 0., 0., 0.);
+        tmpRect.size = s.orthoSize();
+        //cout << "\tverts rect is " << tmpRect << endl;
+        float verts[] = {
+                (float) tmpRect.minX(), (float) tmpRect.minY(), 0.0,
+                (float) tmpRect.minX(), (float) tmpRect.maxY(), 0.0,
+                (float) tmpRect.maxX(), (float) tmpRect.maxY(), 0.0,
+                (float) tmpRect.maxX(), (float) tmpRect.minY(), 0.0
+        };
+        tmpRect = targetTex->glReadySrcRect();
+        //cout << "\ttex coords are " << tmpRect << endl;
+        float texs[] = {
+                (float) tmpRect.minX(), (float) tmpRect.minY(),
+                (float) tmpRect.minX(), (float) tmpRect.maxY(),
+                (float) tmpRect.maxX(), (float) tmpRect.maxY(),
+                (float) tmpRect.maxX(), (float) tmpRect.minY(),
+        };
+        glVertexPointer(3, GL_FLOAT, 0, verts);
         glTexCoordPointer(2, GL_FLOAT, 0, texs);
 
         //glActiveTexture(GL_TEXTURE0);
