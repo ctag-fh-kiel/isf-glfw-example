@@ -9,6 +9,20 @@ Based on examples from
 
 Tested on OSX 12.6
 
+# Linux:
+- Tested on Linux(Arch) with glew 2.2.0-7, libglvnd 1.7.0-1, glfw 3.4-2, gcc 14.2.1
+- using sway/wayland wayland 1.23.1-1, sway 1:1.9-5
+to compile and run:
+```
+git clone <this repo> && cd <this repo>
+git submodule update --init
+make
+cd bin
+./TestExecutable
+```
+at this commit, one sees a red window with a black square in the top right quadrant which is kinda
+blinking
+
 # GLEW & GLFW
 see https://www.reddit.com/r/gamedev/comments/45v9uz/comment/d00jsgz/?utm_source=share&utm_medium=web2x&context=3
 
