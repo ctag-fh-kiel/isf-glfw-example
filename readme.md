@@ -20,8 +20,7 @@ make
 cd bin
 ./TestExecutable
 ```
-at this commit, one sees a red window with a black square in the top right quadrant which is kinda
-blinking
+at this commit, one sees the shader output properly, but still in the top right quadrant
 
 # GLEW & GLFW
 see https://www.reddit.com/r/gamedev/comments/45v9uz/comment/d00jsgz/?utm_source=share&utm_medium=web2x&context=3

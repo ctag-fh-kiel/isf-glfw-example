@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
                 (float) tmpRect.maxX(), (float) tmpRect.maxY(), 0.0,
                 (float) tmpRect.maxX(), (float) tmpRect.minY(), 0.0
         };
-        tmpRect = targetTex->glReadySrcRect();
+        //tmpRect = targetTex->glReadySrcRect();
         //cout << "\ttex coords are " << tmpRect << endl;
         float texs[] = {
                 (float) tmpRect.minX(), (float) tmpRect.minY(),
